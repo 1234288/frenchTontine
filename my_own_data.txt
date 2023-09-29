@@ -1,0 +1,197 @@
+== Tables
+
+From:(Fabrice Kodjo LABOU) OR From:(Fabrice.LABOU@togocom.tg)
+
+partners
+  - id
+  - name (unique)
+  - status (activated / disabled)
+  - created_by
+  - created_at
+  - updated_by
+  - updated_at
+  - deleted_by
+  - deleted_at
+
+agencies
+  - id
+  - name (unique)
+  - accounting_code
+  - status (activated / disabled)
+  - partner_id
+  - created_by
+  - created_at
+  - updated_by
+  - updated_at
+  - deleted_by
+  - deleted_at
+
+pdvs
+  - id
+  - operator_number (unique)
+  - name
+  - accounting_code
+  - status (activated / disabled)
+  - agency_id
+  - created_by
+  - created_at
+  - updated_by
+  - updated_at
+  - deleted_by
+  - deleted_at
+
+users
+  - id
+  - first_name
+  - last_name
+  - username
+  - email (unique)
+  - msisdn (unique)
+  - password
+  - profile (agency, director, admin, super_admin) equals to role
+  - status (activated, disabled)
+  - otp_mode (sms/email)
+  - agency_id
+  - partner_id
+  - change_password (true / false)
+  - created_by
+  - created_at
+  - updated_by
+  - updated_at
+  - deleted_by
+  - deleted_at
+
+roles
+  - id
+  - name (UNIQUE)
+  - description
+
+user_roles
+  - user_id
+  - role_id
+
+permissions
+  - id
+  - name (UNIQUE)
+  - description
+
+role_permissions
+  - role_id
+  - permission_id
+
+transactions
+  - id
+  - debtor
+  - creditor
+  - amount
+  - fees
+  - motive
+  - amdocs_reference
+  - transaction_status
+  - date
+
+configs //AMDOCS_CREDITOR_ACCOUNT, TOKEN_ACTIVATION_EXPIRATION
+  - id
+  - label (Unique)
+  - value
+  - description
+  - partenr_id
+  - created_by
+  - created_at
+  - updated_by
+  - updated_at
+  - deleted_by
+  - deleted_at
+
+
+const whiteColor = '#FFF';
+const mainColor = '#D51926';
+
+const primary = {
+  light: adjustColor(mainColor, 20),
+  main: mainColor,
+  dark: adjustColor(mainColor, -20),
+  contrastText: whiteColor
+};
+
+function adjustColor(color, amount) {
+  // Convert color to RGB
+  const [r, g, b] = hexToRgb(color);
+
+  // Adjust each RGB component
+  const adjustedR = clamp(r + amount, 0, 255);
+  const adjustedG = clamp(g + amount, 0, 255);
+  const adjustedB = clamp(b + amount, 0, 255);
+
+  // Convert adjusted RGB back to hex
+  return rgbToHex(adjustedR, adjustedG, adjustedB);
+}
+
+function hexToRgb(color) {
+  const hex = color.slice(1); // Remove the leading '#'
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  return [r, g, b];
+}
+
+function rgbToHex(r, g, b) {
+  const hexR = r.toString(16).padStart(2, '0');
+  const hexG = g.toString(16).padStart(2, '0');
+  const hexB = b.toString(16).padStart(2, '0');
+  return `#${hexR}${hexG}${hexB}`;
+}
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+// Usage
+console.log(primary);
+
+
+----------------------------------------------- Amélioration
+1- 10.228.11.220:9196/auth/authenticate
+
+J'aimerai que cette route nous renvoie le numéro sur lequelle le message à été envoyer sous format semigrisé
+example : ******8026, cela va me permettre de faire :
+response.data.data.msisdn
+
+Vérification en deux étapes 💬
+Nous avons envoyé un code de vérification sur votre mobile. Entrez le code du mobile dans le champ ci-dessous. ******8026
+
+2-
+
+
+
+
+Field must contain at least one uppercase, lowercase, special character and digit with min 8 chars
+
+This field is required
+
+The Confirm Password field confirmation does not match
+
+This field is required
+
+
+
+
+Référence
+Numéro Opérateur
+Initiateur
+Bénéficiaire
+
+
+(Email / Phone Number) or Password is invalid
+
+90898190
+
+Gilles.AWESSO@togocom.tg
+
+
+AWESSO Gilles Koffi Lolonyo
+
+Gilles.AWESSO@togocom.tg
+
+Souviens-toi de moi
+Mot de passe oubl
